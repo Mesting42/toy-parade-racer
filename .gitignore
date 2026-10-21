@@ -1,0 +1,18 @@
+node_modules/
+dist/
+playwright-report/
+test-results/
+
+# Local environment and editor files
+.env
+.env.*
+!.env.example
+*.local
+*.log
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Local session handoff notes
+会话交接-*.md

@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>玩具巡游赛 · 合金车模型细节</title>
+<style>
+*{box-sizing:border-box}body{margin:0;color:#294e48;background:#f5e7c2;font:15px/1.5 system-ui,sans-serif}canvas{display:block;width:100vw;height:100vh}.panel{position:fixed;top:22px;left:22px;max-width:390px;padding:20px;background:#fff8e9ed;border:1px solid #d8c5a5;border-radius:16px}h1{font-size:23px;margin:0 0 8px}p{margin:8px 0;color:#6b7364}button,select,a{font:inherit;color:inherit;background:#fffaf0;border:1px solid #d3c4a9;border-radius:8px;padding:9px 12px}button{cursor:pointer}button[aria-pressed=true]{background:#28594e;color:#fff5dc}select{width:100%;margin:8px 0}.views{display:flex;gap:6px;flex-wrap:wrap}#status{border-top:1px solid #d8c5a5;margin-top:15px;padding-top:12px;font-weight:600}a{position:fixed;bottom:20px;right:22px;text-decoration:none}small{display:block;color:#6b7364}@media(max-width:600px){.panel{top:12px;left:12px;right:12px;padding:13px;max-width:none}h1{font-size:19px}p,small{font-size:12px}button{padding:7px 9px;font-size:13px}#status{margin-top:9px;padding-top:8px;font-size:13px}}
+</style></head><body><canvas aria-label="赛车模型展示"></canvas><section class="panel"><h1>精致合金玩具车</h1><small>使用游戏相同模型、车漆与光照 · 独立展示，不读写存档</small><label for="car">查看车型</label><select id="car"></select><div class="views"><button data-view="front" aria-pressed="true">前侧细节</button><button data-view="rear" aria-pressed="false">后侧细节</button><button data-view="side" aria-pressed="false">轮毂侧面</button><button data-view="all" aria-pressed="false">六车合影</button></div><p>车灯、轮毂、格栅、窗框、车身饰件与清漆质感。</p><div id="status" role="status">正在载入六款本地车型…</div></section><a href="/">返回游戏</a>
+<script type="module">
+import * as THREE from 'three';
+import {ToyWorld,RACE_CAR_DATA} from '/src/world.js';
+import {freshProfile} from '/src/storage.js';
+const world=new ToyWorld(document.querySelector('canvas'),freshProfile().settings);
+world.cameraMode='inspection';world.scene.fog=null;
+const floor=new THREE.Mesh(new THREE.PlaneGeometry(2000,2000),new THREE.MeshStandardMaterial({color:'#e1cda7',roughness:.83}));floor.rotation.x=-Math.PI/2;floor.position.y=-.41;floor.receiveShadow=true;world.scene.add(floor);
+// Match the game's light colors and intensities; tighten the shadow camera for this small display.
+world.sun.shadow.camera.left=-20;world.sun.shadow.camera.right=20;world.sun.shadow.camera.top=20;world.sun.shadow.camera.bottom=-20;world.sun.shadow.camera.updateProjectionMatrix();
+const select=document.querySelector('#car'),status=document.querySelector('#status');
+RACE_CAR_DATA.forEach(car=>{const option=document.createElement('option');option.value=car.id;option.textContent=car.name;select.append(option);});
+let view='front',ready=false;
+function show(){
+ if(!ready)return;
+ for(const old of [...world.actorRoot.children]){old.removeFromParent();old.traverse(o=>{if(!o.userData?.kenneySharedGeometry)o.geometry?.dispose();for(const m of o.material?(Array.isArray(o.material)?o.material:[o.material]):[]){if(!m.userData?.kenneySharedMap)m.map?.dispose();m.dispose();}});}
+ const selected=RACE_CAR_DATA.find(car=>car.id===select.value),cars=view==='all'?RACE_CAR_DATA:[selected];
+ for(const [i,car] of cars.entries()){const model=world.makeKitCar(car.id,car.color,car.secondary,RACE_CAR_DATA.indexOf(car)+1);if(view==='all')model.position.set((i%3-1)*6.6,0,(Math.floor(i/3)-.5)*9);world.actorRoot.add(model);}
+ const narrow=innerWidth<700;
+ if(view==='all')world.camera.position.set(19,24,28);
+ else if(view==='rear')world.camera.position.set(8,5.5,-11);
+ else if(view==='side')world.camera.position.set(12,3.9,1);
+ else world.camera.position.set(8,5.7,11);
+ world.camera.fov=narrow?57:40;world.camera.updateProjectionMatrix();
+ world.camera.lookAt(view==='all'?-1.5:-.8,narrow?2.3:1.1,0);
+ status.textContent=(view==='all'?'六种不同车身':selected.name)+' · '+({front:'前侧细节',rear:'后侧细节',side:'轮毂侧面',all:'六车合影'}[view]);
+ document.querySelectorAll('[data-view]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.view===view)));
+}
+select.onchange=show;document.querySelectorAll('[data-view]').forEach(button=>button.onclick=()=>{view=button.dataset.view;show();});window.addEventListener('resize',show);
+function waitForAssets(){if(world.kitModels.size<16){requestAnimationFrame(waitForAssets);return;}ready=true;show();}waitForAssets();
+</script></body></html>

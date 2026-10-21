@@ -1,0 +1,314 @@
+
+> toy-parade-race@1.0.0 test
+> node --test tests/*.test.js
+
+TAP version 13
+# Subtest: six distinct local diecast shells have no characters and retain four separate wheels
+ok 1 - six distinct local diecast shells have no characters and retain four separate wheels
+  ---
+  duration_ms: 61.3975
+  type: 'test'
+  ...
+# Subtest: each selectable player car leaves five different opponent model assets
+ok 2 - each selectable player car leaves five different opponent model assets
+  ---
+  duration_ms: 0.4591
+  type: 'test'
+  ...
+# Subtest: wheels roll with actual travel, steer at a separate pivot and stop rolling when stationary
+ok 3 - wheels roll with actual travel, steer at a separate pivot and stop rolling when stationary
+  ---
+  duration_ms: 0.6672
+  type: 'test'
+  ...
+# Subtest: tournament advances through all three cups and nine stations, including saved resume state
+ok 4 - tournament advances through all three cups and nine stations, including saved resume state
+  ---
+  duration_ms: 4.915
+  type: 'test'
+  ...
+# Subtest: low cup points restart the cup, replace improved station results, and unlock the next cup
+ok 5 - low cup points restart the cup, replace improved station results, and unlock the next cup
+  ---
+  duration_ms: 0.7478
+  type: 'test'
+  ...
+# Subtest: cup two stays locked until combined cup points reach eighteen
+ok 6 - cup two stays locked until combined cup points reach eighteen
+  ---
+  duration_ms: 0.3295
+  type: 'test'
+  ...
+# Subtest: rematching a station may improve its score without skipping the next station
+ok 7 - rematching a station may improve its score without skipping the next station
+  ---
+  duration_ms: 0.2713
+  type: 'test'
+  ...
+# Subtest: final standings show a non-champion correctly after all nine stations
+ok 8 - final standings show a non-champion correctly after all nine stations
+  ---
+  duration_ms: 0.6216
+  type: 'test'
+  ...
+# Subtest: phone rotation keeps mobile quality; tablets and desktop get their own framing
+ok 9 - phone rotation keeps mobile quality; tablets and desktop get their own framing
+  ---
+  duration_ms: 2.0939
+  type: 'test'
+  ...
+# Subtest: simultaneous throttle, steering and drift survive an unrelated release and clear on cancel/blur
+ok 10 - simultaneous throttle, steering and drift survive an unrelated release and clear on cancel/blur
+  ---
+  duration_ms: 6.7743
+  type: 'test'
+  ...
+# Subtest: left and right controls match the chase-camera screen direction
+ok 11 - left and right controls match the chase-camera screen direction
+  ---
+  duration_ms: 1.6637
+  type: 'test'
+  ...
+# Subtest: nine circuits have separate closed layouts, three laps and stable nearest-point projection
+ok 12 - nine circuits have separate closed layouts, three laps and stable nearest-point projection
+  ---
+  duration_ms: 11.2829
+  type: 'test'
+  ...
+# Subtest: autopilot completes three physical laps on 积木广场
+ok 13 - autopilot completes three physical laps on 积木广场
+  ---
+  duration_ms: 330.0713
+  type: 'test'
+  ...
+# Subtest: autopilot completes three physical laps on 齿轮花园
+ok 14 - autopilot completes three physical laps on 齿轮花园
+  ---
+  duration_ms: 382.7908
+  type: 'test'
+  ...
+# Subtest: autopilot completes three physical laps on 纸箱山坡
+ok 15 - autopilot completes three physical laps on 纸箱山坡
+  ---
+  duration_ms: 567.5948
+  type: 'test'
+  ...
+# Subtest: autopilot completes three physical laps on 纸板峡谷
+ok 16 - autopilot completes three physical laps on 纸板峡谷
+  ---
+  duration_ms: 408.2165
+  type: 'test'
+  ...
+# Subtest: autopilot completes three physical laps on 软陶火山口
+ok 17 - autopilot completes three physical laps on 软陶火山口
+  ---
+  duration_ms: 445.0231
+  type: 'test'
+  ...
+# Subtest: autopilot completes three physical laps on 弹珠车站
+ok 18 - autopilot completes three physical laps on 弹珠车站
+  ---
+  duration_ms: 319.0948
+  type: 'test'
+  ...
+# Subtest: autopilot completes three physical laps on 缝线工作台
+ok 19 - autopilot completes three physical laps on 缝线工作台
+  ---
+  duration_ms: 272.9938
+  type: 'test'
+  ...
+# Subtest: autopilot completes three physical laps on 纽扣街角
+ok 20 - autopilot completes three physical laps on 纽扣街角
+  ---
+  duration_ms: 359.5926
+  type: 'test'
+  ...
+# Subtest: autopilot completes three physical laps on 晚餐桌冲刺
+ok 21 - autopilot completes three physical laps on 晚餐桌冲刺
+  ---
+  duration_ms: 280.1045
+  type: 'test'
+  ...
+# Subtest: quick race starts six racers and freezes its state after the player finishes
+ok 22 - quick race starts six racers and freezes its state after the player finishes
+  ---
+  duration_ms: 1.6993
+  type: 'test'
+  ...
+# Subtest: quick and championship mount six unique models for every player selection
+ok 23 - quick and championship mount six unique models for every player selection
+  ---
+  duration_ms: 0.6103
+  type: 'test'
+  ...
+# Subtest: five computer drivers complete clean three-lap races at every difficulty
+ok 24 - five computer drivers complete clean three-lap races at every difficulty
+  ---
+  duration_ms: 4414.453
+  type: 'test'
+  ...
+# Subtest: all seven authored items activate their actual simulation effect
+ok 25 - all seven authored items activate their actual simulation effect
+  ---
+  duration_ms: 2.4216
+  type: 'test'
+  ...
+# Subtest: item boxes fill one inventory slot and shields absorb one hit
+ok 26 - item boxes fill one inventory slot and shields absorb one hit
+  ---
+  duration_ms: 1.1979
+  type: 'test'
+  ...
+# Subtest: championship standings total six-racer points across multiple races
+ok 27 - championship standings total six-racer points across multiple races
+  ---
+  duration_ms: 0.746
+  type: 'test'
+  ...
+# Subtest: all random outcomes have a clear category, target, purpose and authored icon
+ok 28 - all random outcomes have a clear category, target, purpose and authored icon
+  ---
+  duration_ms: 1.3729
+  type: 'test'
+  ...
+# Subtest: random boxes draw only existing items and all seven are reachable at every rank
+ok 29 - random boxes draw only existing items and all seven are reachable at every rank
+  ---
+  duration_ms: 33.883
+  type: 'test'
+  ...
+# Subtest: rocket targets exactly the preceding active rank and first place fires without a target
+ok 30 - rocket targets exactly the preceding active rank and first place fires without a target
+  ---
+  duration_ms: 2.1133
+  type: 'test'
+  ...
+# Subtest: player rocket hits the preceding racer, launches one full roll and holds speed at zero until landing
+ok 31 - player rocket hits the preceding racer, launches one full roll and holds speed at zero until landing
+  ---
+  duration_ms: 40.6438
+  type: 'test'
+  ...
+# Subtest: shield consumes a rocket without launching the car or forcing its speed to zero
+ok 32 - shield consumes a rocket without launching the car or forcing its speed to zero
+  ---
+  duration_ms: 6.1908
+  type: 'test'
+  ...
+# Subtest: leading rocket follows bends across the finish seam and expires without retargeting
+ok 33 - leading rocket follows bends across the finish seam and expires without retargeting
+  ---
+  duration_ms: 7.6117
+  type: 'test'
+  ...
+# Subtest: locked rocket crosses the finish seam, follows a distant lane and keeps its launch target
+ok 34 - locked rocket crosses the finish seam, follows a distant lane and keeps its launch target
+  ---
+  duration_ms: 2.7967
+  type: 'test'
+  ...
+# Subtest: a close target in another lane is intercepted without the rocket circling the track
+ok 35 - a close target in another lane is intercepted without the rocket circling the track
+  ---
+  duration_ms: 0.843
+  type: 'test'
+  ...
+# Subtest: rockets intercept moving, changing-lane and jumping targets on every circuit
+ok 36 - rockets intercept moving, changing-lane and jumping targets on every circuit
+  ---
+  duration_ms: 190.4877
+  type: 'test'
+  ...
+# Subtest: a rocket ends when its locked opponent finishes instead of continuing as an empty shot
+ok 37 - a rocket ends when its locked opponent finishes instead of continuing as an empty shot
+  ---
+  duration_ms: 0.8737
+  type: 'test'
+  ...
+# Subtest: a computer picks up a real random box and fires its rocket at the preceding player
+ok 38 - a computer picks up a real random box and fires its rocket at the preceding player
+  ---
+  duration_ms: 22.6265
+  type: 'test'
+  ...
+# Subtest: shockwave pushes a driving opponent outward by about one car length instead of only slowing it
+ok 39 - shockwave pushes a driving opponent outward by about one car length instead of only slowing it
+  ---
+  duration_ms: 6.6351
+  type: 'test'
+  ...
+# Subtest: shockwave force moves outwards in every direction with consistent travel at different frame rates
+ok 40 - shockwave force moves outwards in every direction with consistent travel at different frame rates
+  ---
+  duration_ms: 1.0824
+  type: 'test'
+  ...
+# Subtest: shielded, immune and out-of-range opponents receive no shockwave force
+ok 41 - shielded, immune and out-of-range opponents receive no shockwave force
+  ---
+  duration_ms: 1.9967
+  type: 'test'
+  ...
+# Subtest: computer shockwaves push the player through the same movement pipeline
+ok 42 - computer shockwaves push the player through the same movement pipeline
+  ---
+  duration_ms: 3.6815
+  type: 'test'
+  ...
+# Subtest: shockwave outward movement remains blocked by the solid moving obstacle
+ok 43 - shockwave outward movement remains blocked by the solid moving obstacle
+  ---
+  duration_ms: 6.5281
+  type: 'test'
+  ...
+# Subtest: flames, shield shell, rockets and impacts remain distinct and clear on reset
+ok 44 - flames, shield shell, rockets and impacts remain distinct and clear on reset
+  ---
+  duration_ms: 58.3289
+  type: 'test'
+  ...
+# Subtest: the full yellow bar and separate blue wheel are solid beyond the old central circle
+ok 45 - the full yellow bar and separate blue wheel are solid beyond the old central circle
+  ---
+  duration_ms: 15.154
+  type: 'test'
+  ...
+# Subtest: rotated obstacle ends use the same transform as the rendered toy
+ok 46 - rotated obstacle ends use the same transform as the rendered toy
+  ---
+  duration_ms: 0.6494
+  type: 'test'
+  ...
+# Subtest: swept collision prevents a fast kart from crossing the bar or wheel between frames
+ok 47 - swept collision prevents a fast kart from crossing the bar or wheel between frames
+  ---
+  duration_ms: 2.459
+  type: 'test'
+  ...
+# Subtest: a moving obstacle pushes a stationary kart without leaving it embedded
+ok 48 - a moving obstacle pushes a stationary kart without leaving it embedded
+  ---
+  duration_ms: 5.9125
+  type: 'test'
+  ...
+# Subtest: clear routes and airborne karts outside the obstacle height are not blocked
+ok 49 - clear routes and airborne karts outside the obstacle height are not blocked
+  ---
+  duration_ms: 1.0248
+  type: 'test'
+  ...
+# Subtest: hit protection and a shield prevent repeated damage but cannot disable solid collision
+ok 50 - hit protection and a shield prevent repeated damage but cannot disable solid collision
+  ---
+  duration_ms: 9.509
+  type: 'test'
+  ...
+1..50
+# tests 50
+# suites 0
+# pass 50
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 9061.5094

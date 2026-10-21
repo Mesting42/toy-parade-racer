@@ -1,0 +1,42 @@
+{
+  "product": "玩具巡游赛",
+  "direction": "Sunlit handmade tabletop toy kart racing",
+  "brandAsset": "/brand-mark.svg",
+  "palette": {
+    "ink": "#31594f",
+    "inkSoft": "#52786a",
+    "paper": "#f8f0db",
+    "paperDeep": "#f0e2c1",
+    "sun": "#f4cd6c",
+    "tomato": "#e65d4c",
+    "pond": "#4f9292",
+    "leaf": "#72986a",
+    "line": "#bca57b"
+  },
+  "type": {
+    "display": ["ZCOOL KuaiLe", "Microsoft YaHei", "PingFang SC", "sans-serif"],
+    "body": ["Microsoft YaHei", "PingFang SC", "sans-serif"]
+  },
+  "breakpoints": {
+    "phoneMax": 700,
+    "tabletMin": 701,
+    "tabletMax": 900,
+    "compactPhoneMax": 420,
+    "shortLandscapeMaxHeight": 550
+  },
+  "raceHud": ["rank", "lap", "time", "routeMap", "speed", "driftCharge", "heldItem"],
+  "touch": {
+    "steer": "left-side directional controls",
+    "pedals": "right-side brake, drift, item, and throttle",
+    "multitouch": true,
+    "safeAreaInsets": true
+  },
+  "accessibility": {
+    "language": "zh-CN",
+    "ariaLive": true,
+    "reducedMotion": true,
+    "reduceShake": true,
+    "reduceParticles": true,
+    "disableFlashes": true
+  }
+}

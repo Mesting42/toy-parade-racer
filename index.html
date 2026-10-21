@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#f4cd6c" />
+    <meta name="description" content="在手工搭建的玩具赛道上，与五位电脑车手展开三圈街机竞速。" />
+    <link rel="icon" type="image/svg+xml" href="/brand-mark.svg" />
+    <title>玩具巡游赛 · 桌面玩具卡丁车</title>
+  </head>
+  <body>
+    <!--
+      THESIS: A tabletop toy race assembled from painted wood, folded card, cloth and clay; every mode leads into readable, hands-on karting.
+      OWN-WORLD: Sunlit honey board, spruce green, tomato red and butter yellow; hand-lettered type, stitch marks, paper route flags and lacquered model karts.
+      STORY: Pick a kart and circuit, then steer, drift, collect and finish three honest laps against five distinct toy drivers.
+      FIRST VIEWPORT: A full-bleed tabletop circuit fills the stage; the title and large race-start action anchor the lower-left; cup stamps and kart picker sit along the right edge.
+      FORM: Experience surface driven by a live Three.js world, with tactile ticket controls and a compact edge HUD during races.
+      SEED: d2f0c817. The brief pins this tabletop toy world and takes precedence over the generated direction roll.
+      FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
+    -->
+    <canvas id="world" aria-label="手工玩具赛道三维画面"></canvas>
+    <div id="app" aria-live="polite">
+      <div class="boot"><span class="boot-wheel"></span><strong>巡游小车正在上发条</strong></div>
+    </div>
+    <div id="toast" role="status" aria-live="polite"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

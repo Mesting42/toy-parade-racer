@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>玩具巡游赛 · 道具效果演示</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f4e4c6;font:15px/1.5 system-ui,sans-serif;color:#244b45}canvas{display:block;width:100vw;height:100vh}.panel{position:fixed;left:20px;top:20px;width:min(390px,calc(100vw - 40px));padding:20px;background:rgba(255,248,230,.95);border:1px solid #d2bea0;border-radius:18px;box-shadow:0 8px 30px #63482120}h1{margin:0 0 7px;font-size:23px}p{margin:5px 0 13px}small{display:block;color:#6b7467}button{font:inherit;border:1px solid #d5c4a5;background:#fffaf0;color:#24564c;padding:9px 12px;border-radius:9px;cursor:pointer}button:hover,button.active{background:#285c50;color:#fff7e1;border-color:#285c50}.controls{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0}.status{font-weight:600;min-height:45px;border-top:1px solid #d7c7ac;padding-top:12px}.foot{position:fixed;bottom:18px;left:20px;right:20px;display:flex;gap:8px;justify-content:space-between;align-items:center;color:#244b45}.foot a{color:inherit;background:#fff8e8e8;padding:8px 12px;border-radius:8px}@media(max-width:600px){.panel{padding:13px;left:12px;top:12px;width:calc(100vw - 24px)}h1{font-size:19px}.controls{gap:5px;margin:8px 0}button{font-size:13px;padding:7px 9px}small{font-size:11px}.foot{left:12px;bottom:12px}.status{font-size:13px;min-height:38px}}
+</style></head>
+<body><canvas id="world"></canvas><section class="panel"><h1>道具效果演示</h1><small>独立临时场景 · 不读写存档 · 使用游戏相同模型、特效与物理。车辆自动沿路线行驶，便于观察。</small><div class="controls" id="controls"></div><label><input id="freeze-hit" type="checkbox" checked> 命中翻滚时暂停，便于检查</label><div id="status" class="status" aria-live="polite">正在载入本地玩具车…</div></section><div class="foot"><button id="pause">暂停画面</button><a href="/">返回正常游戏</a></div>
+<script type="module">
+import * as THREE from 'three';
+import {ToyWorld} from '/src/world.js';
+import {TRACKS} from '/src/tracks.js';
+import {createRace,tickRace,autopilotInput} from '/src/race.js';
+import {freshProfile} from '/src/storage.js';
+import {ITEM_LIST} from '/src/items.js';
+const settings={...freshProfile().settings,music:0,sfx:0},world=new ToyWorld(document.querySelector('canvas'),settings),track=TRACKS[0];
+world.setTrack(track);
+const demos=[['spring','喷火推进'],['bubble','护罩拦截火箭'],['rocket','火箭追击前一名'],['rocket-close','近距离跨车道追击'],['blast','受击升空翻滚'],['lineup','六车车型对照'],['wave','震荡波'],['magnet','磁力吸附'],['glue','黏胶团'],['decoy','纸盒诱饵']];
+const controls=document.querySelector('#controls'),status=document.querySelector('#status');
+for(const [id,label] of demos){const button=document.createElement('button');button.textContent=label;button.dataset.demo=id;button.onclick=()=>startDemo(id);controls.append(button);}
+let race,pending=false,last=0,current='spring',resetAt=7,launched=false,freezeDone=false,waveMarkers=null,waveTargets=[];
+let startS=80,best=Infinity;
+for(let s=80;s<track.length-120;s+=12){const score=track.curvature(s)+track.curvature(s+35)+track.curvature(s+70);if(score<best&&Math.abs(s-track.length*track.obstacle)>100){best=score;startS=s;}}
+function place(racer,s,lane=0){const point=track.at(s,lane);Object.assign(racer,{x:point.x,y:point.y,z:point.z,yaw:point.yaw,progress:s,nearestS:point.s,lastS:point.s,lateral:lane,vx:0,vz:0,speed:0,laneTarget:lane});}
+function startDemo(id){
+  current=id;launched=false;pending=false;freezeDone=false;
+  if(waveMarkers){waveMarkers.removeFromParent();waveMarkers.traverse(node=>{node.geometry?.dispose();node.material?.dispose();});waveMarkers=null;}waveTargets=[];
+  race=createRace(track,'quick','normal',freshProfile(),world);race.countdown=0;race.started=true;
+  // This review scene intentionally supplies the selected item and positions
+  // the cars; it is not evidence of a normal race or championship playthrough.
+  place(race.player,startS);race.racers.slice(1).forEach((racer,i)=>place(racer,startS+(i===0?25:-22-(i-1)*22),(i%2?1:-1)*2));
+  race.items=race.items.filter(item=>item.kind==='coin');
+  if(id==='blast'){race.racers[2].item=ITEM_LIST.find(item=>item.id==='rocket');race.racers[2].itemHeldFor=1;}
+  else{race.player.item=ITEM_LIST.find(item=>item.id===(id==='rocket-close'?'rocket':id));pending=!!race.player.item;}
+  if(id==='rocket-close'){place(race.player,startS,-8);place(race.racers[1],startS+7,8);}
+  if(id==='wave'){
+    race.racers.slice(1).forEach((racer,i)=>place(racer,i<2?startS:startS-60-(i-2)*18,i===0?-6:i===1?6:0));
+    waveMarkers=new THREE.Group();waveMarkers.name='pre-hit-positions-review-only';world.trackRoot.add(waveMarkers);
+    for(const target of race.racers.slice(1,3)){
+      const dx=target.x-race.player.x,dz=target.z-race.player.z,length=Math.hypot(dx,dz);waveTargets.push({racer:target,x:target.x,z:target.z,dx:dx/length,dz:dz/length});
+      const ring=new THREE.Mesh(new THREE.TorusGeometry(2.3,.08,6,48),new THREE.MeshBasicMaterial({color:'#fff6da',transparent:true,opacity:.9,depthWrite:false}));ring.rotation.x=Math.PI/2;ring.position.set(target.x,.35,target.z);waveMarkers.add(ring);
+    }
+  }
+  world.cameraMode='race';const p=race.player;world.camera.position.set(p.x-Math.sin(p.yaw)*23,p.y+12,p.z-Math.cos(p.yaw)*23);world.cameraLook.set(p.x+Math.sin(p.yaw)*14,p.y+1,p.z+Math.cos(p.yaw)*14);world.camera.lookAt(world.cameraLook);
+  controls.querySelectorAll('button').forEach(button=>button.classList.toggle('active',button.dataset.demo===id));document.querySelector('#pause').textContent='暂停画面';
+  resetAt=id==='magnet'?7:8;status.textContent=demos.find(demo=>demo[0]===id)[1]+' · 自动循环演示';
+  if(id==='lineup'){
+    race.racers.forEach((racer,i)=>place(racer,startS+Math.floor(i/2)*11,(i%2?1:-1)*6));world.updateActors(0,0);race.paused=true;world.cameraMode='inspection';
+    const cameraPoint=track.at(startS-21,2),look=track.at(startS+10);world.camera.position.set(cameraPoint.x,cameraPoint.y+35,cameraPoint.z);world.camera.lookAt(look.x,look.y,look.z);
+    document.querySelector('#pause').textContent='继续演示';status.textContent='六种不同车身：黄蜂冲锋、蘑菇慢邮、松果铁皮、流星长尾、复古银箭、薄荷越野。';
+  }
+  if(id==='wave'){
+    world.cameraMode='inspection';const back=track.at(startS-16),look=track.at(startS+3);world.camera.position.set(back.x,31,back.z);world.camera.lookAt(look.x,look.y,look.z);
+    status.textContent='震荡波实测 · 白圈标出受击前位置；约半秒后暂停对比。';
+  }
+}
+document.querySelector('#pause').onclick=()=>{race.paused=!race.paused;document.querySelector('#pause').textContent=race.paused?'继续演示':'暂停画面';};
+function frame(now){requestAnimationFrame(frame);const dt=Math.min(.04,Math.max(0,(now-last)/1000||.016));last=now;if(!race||race.paused)return;
+  if(current==='bubble'&&race.elapsed>.65&&!launched){race.racers[2].item=ITEM_LIST.find(item=>item.id==='rocket');race.racers[2].itemHeldFor=1;launched=true;}
+  const input=autopilotInput(race.player,race,dt);input.item=pending;pending=false;tickRace(race,input,dt,settings);
+  if(race.player.blastTime>0)status.textContent='火箭命中 · 升空翻滚一整圈 · 当前速度 '+Math.round(race.player.speed)+' m/s';
+  else if(race.itemMessage&&race.elapsed<race.itemMessage.until)status.textContent=race.itemMessage.text;
+  if(current==='wave'&&race.elapsed>=.5&&!freezeDone){
+    freezeDone=true;race.paused=true;document.querySelector('#pause').textContent='继续演示';
+    const distances=waveTargets.map(target=>((target.racer.x-target.x)*target.dx+(target.racer.z-target.z)*target.dz).toFixed(2));
+    status.textContent='向外推开 '+distances.join(' / ')+' 单位（车长 6.15）· 白圈为受击前位置 · 画面暂停检查';
+  }
+  const flipping=race.racers.find(racer=>racer.blastTime>.55&&racer.blastTime<.75);
+  if(flipping&&document.querySelector('#freeze-hit').checked&&!freezeDone){
+    freezeDone=true;race.paused=true;document.querySelector('#pause').textContent='继续演示';status.textContent='已命中'+(flipping.isPlayer?'你':flipping.driver?.name)+' · 翻滚 '+Math.round(flipping.blastRoll*180/Math.PI)+'° · 速度 '+flipping.speed+' m/s · 画面暂停检查';
+    world.updateActors(0,now/1000);world.cameraMode='inspection';
+    world.camera.position.set(flipping.x-Math.sin(flipping.yaw)*18+Math.cos(flipping.yaw)*12,flipping.y+flipping.jumpY+10,flipping.z-Math.cos(flipping.yaw)*18-Math.sin(flipping.yaw)*12);
+    world.camera.lookAt(flipping.x,flipping.y+flipping.jumpY+1.5,flipping.z);
+  }
+  if(race.elapsed>resetAt)startDemo(current);
+}
+startDemo(current);requestAnimationFrame(frame);
+</script></body></html>

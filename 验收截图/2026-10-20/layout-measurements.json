@@ -1,0 +1,293 @@
+{
+  "note": "DOM measurements from browser viewport checks. Preserve the observed 1024x768 defect before the fix; final contains the last passing measurement for each recorded size. Phone 390x844, 844x390 and 800x360 checks are documented in the review report and screenshots.",
+  "beforeFix": [
+    {
+      "buttons": [
+        {
+          "h": 44,
+          "name": "暂停比赛",
+          "w": 44,
+          "x": 966,
+          "y": 14
+        },
+        {
+          "h": 44,
+          "name": "复位到赛道",
+          "w": 44,
+          "x": 966,
+          "y": 64
+        },
+        {
+          "h": 60,
+          "name": "向左转弯",
+          "w": 60,
+          "x": 0,
+          "y": 0
+        },
+        {
+          "h": 60,
+          "name": "向右转弯",
+          "w": 60,
+          "x": 60,
+          "y": 0
+        },
+        {
+          "h": 20,
+          "name": "刹车",
+          "w": 41.765625,
+          "x": 144.53125,
+          "y": 27.765625
+        },
+        {
+          "h": 20,
+          "name": "漂移",
+          "w": 41.765625,
+          "x": 186.296875,
+          "y": 27.765625
+        },
+        {
+          "h": 47.765625,
+          "name": "使用道具",
+          "w": 41.765625,
+          "x": 228.0625,
+          "y": 0
+        },
+        {
+          "h": 24,
+          "name": "加速",
+          "w": 49.125,
+          "x": 269.828125,
+          "y": 23.765625
+        }
+      ],
+      "height": 768,
+      "inBounds": true,
+      "leftOverlap": false,
+      "overflow": false,
+      "rightOverlap": false,
+      "targets44": false,
+      "width": 1024
+    }
+  ],
+  "final": [
+    {
+      "buttons": [
+        {
+          "h": 44,
+          "name": "暂停比赛",
+          "w": 44,
+          "x": 710,
+          "y": 14
+        },
+        {
+          "h": 44,
+          "name": "复位到赛道",
+          "w": 44,
+          "x": 710,
+          "y": 64
+        },
+        {
+          "h": 60,
+          "name": "向左转弯",
+          "w": 60,
+          "x": 18,
+          "y": 946
+        },
+        {
+          "h": 60,
+          "name": "向右转弯",
+          "w": 60,
+          "x": 83,
+          "y": 946
+        },
+        {
+          "h": 48,
+          "name": "刹车",
+          "w": 64,
+          "x": 528,
+          "y": 903
+        },
+        {
+          "h": 48,
+          "name": "漂移",
+          "w": 68,
+          "x": 599,
+          "y": 903
+        },
+        {
+          "h": 54,
+          "name": "使用道具",
+          "w": 139,
+          "x": 528,
+          "y": 958
+        },
+        {
+          "h": 109,
+          "name": "加速",
+          "w": 82,
+          "x": 674,
+          "y": 903
+        }
+      ],
+      "height": 1024,
+      "inBounds": true,
+      "leftOverlap": false,
+      "overflow": false,
+      "rightOverlap": false,
+      "targets44": true,
+      "width": 768
+    },
+    {
+      "buttons": [
+        {
+          "h": 44,
+          "name": "暂停比赛",
+          "w": 44,
+          "x": 966,
+          "y": 14
+        },
+        {
+          "h": 44,
+          "name": "复位到赛道",
+          "w": 44,
+          "x": 966,
+          "y": 64
+        },
+        {
+          "h": 60,
+          "name": "向左转弯",
+          "w": 60,
+          "x": 18,
+          "y": 690
+        },
+        {
+          "h": 60,
+          "name": "向右转弯",
+          "w": 60,
+          "x": 83,
+          "y": 690
+        },
+        {
+          "h": 48,
+          "name": "刹车",
+          "w": 64,
+          "x": 784,
+          "y": 647
+        },
+        {
+          "h": 48,
+          "name": "漂移",
+          "w": 68,
+          "x": 855,
+          "y": 647
+        },
+        {
+          "h": 54,
+          "name": "使用道具",
+          "w": 139,
+          "x": 784,
+          "y": 702
+        },
+        {
+          "h": 109,
+          "name": "加速",
+          "w": 82,
+          "x": 930,
+          "y": 647
+        }
+      ],
+      "height": 768,
+      "inBounds": true,
+      "leftOverlap": false,
+      "overflow": false,
+      "rightOverlap": false,
+      "targets44": true,
+      "width": 1024
+    },
+    {
+      "buttons": [
+        {
+          "h": 44,
+          "name": "暂停比赛",
+          "w": 44,
+          "x": 1382,
+          "y": 14
+        }
+      ],
+      "height": 900,
+      "inBounds": true,
+      "leftOverlap": false,
+      "overflow": false,
+      "rightOverlap": false,
+      "targets44": true,
+      "width": 1440
+    },
+    {
+      "buttons": [
+        {
+          "h": 44,
+          "name": "暂停比赛",
+          "w": 44,
+          "x": 268,
+          "y": 8
+        },
+        {
+          "h": 44,
+          "name": "复位到赛道",
+          "w": 44,
+          "x": 219,
+          "y": 8
+        },
+        {
+          "h": 52,
+          "name": "向左转弯",
+          "w": 44,
+          "x": 13,
+          "y": 499
+        },
+        {
+          "h": 52,
+          "name": "向右转弯",
+          "w": 44,
+          "x": 61,
+          "y": 499
+        },
+        {
+          "h": 46,
+          "name": "刹车",
+          "w": 44,
+          "x": 160,
+          "y": 453
+        },
+        {
+          "h": 46,
+          "name": "漂移",
+          "w": 44,
+          "x": 209,
+          "y": 453
+        },
+        {
+          "h": 52,
+          "name": "使用道具",
+          "w": 93,
+          "x": 160,
+          "y": 504
+        },
+        {
+          "h": 103,
+          "name": "加速",
+          "w": 54,
+          "x": 258,
+          "y": 453
+        }
+      ],
+      "height": 568,
+      "inBounds": true,
+      "leftOverlap": false,
+      "overflow": false,
+      "rightOverlap": false,
+      "targets44": true,
+      "width": 320
+    }
+  ]
+}
