@@ -98,3 +98,14 @@ npm run preview
 六种均为完整车壳、无人物模型；四轮分别滚动、前轮随转向摆动。合金玩具车细化包含圆滑橡胶轮胎、胎纹、各车型不同辐数的金属轮毂与螺栓、前灯和分段尾灯、格栅、深色玻璃、窗框、雨刷、门把手、车身接缝与号码涂装；赛车增加进气口和散热槽。细节按照实际车身表面装配，车漆使用清漆与本地生成的环境反射，玩家、电脑、车库与幽灵车共用装配流程。CC0 许可与原始包均已保留。
 
 开发服务器另提供[合金车模型细节页](http://127.0.0.1:5175/.impeccable/review/car-detail-preview.html)，可切换六款车型的前侧、后侧、轮毂近景和六车合影。该页使用游戏相同模型与光照，不读写游戏存档。
+
+<!-- pixel-pier-game-listing:start -->
+## Game listing / 游戏展示
+
+- **Game developer / 游戏开发者:** Mest ([@Mesting42](https://github.com/Mesting42))
+- **Pixel Pier listing / 游戏展示页面:** [Toy Parade Racer](https://riverglint.link/games/toy-parade-racer/)
+
+This game is listed on Pixel Pier with a play entry and game guide. This link identifies a game-development and listing relationship; it does not identify the developer as the website operator or operating entity.
+
+本游戏在 Pixel Pier 展示，并提供游玩入口与游戏指南。此链接仅表示游戏开发与展示关联，不代表开发者是该网站的运营者或运营主体。
+<!-- pixel-pier-game-listing:end -->
